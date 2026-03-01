@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destino del dinero</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #161B32;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Tarjeta */
+.ventana {
+    width: 420px;
+    background-color: #1c2145;
+    border-radius: 20px;
+    padding: 40px 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideDownFadeIn 0.8s ease forwards;
+}
+
+@keyframes slideDownFadeIn {
+    0% {opacity: 0; transform: translateY(-40px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h2 {
+    font-size: 18px;
+    color: #fa496e;
+    letter-spacing: 1px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    background-color: #161B32;
+    color: white;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+/* Botón */
+.boton {
+    padding: 14px;
+    background: #fa496e;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.boton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #fa496e;
+}
+
+/* Mensaje */
+.sorpresa {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Nota inferior */
+.nota {
+    margin-top: 15px;
+    font-size: 12px;
+    opacity: 0.6;
+    text-align: center;
+}
+
+@media screen and (max-width: 450px) {
+    .ventana {
+        width: 90%;
+        padding: 25px 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="ventana">
+    <div class="header">
+        <h2>¿A qué destino quieres que te enviemos la plata?</h2>
+    </div>
+
+    <form id="destinoForm">
+        <div>
+            <label for="metodo">Selecciona tu método:</label>
+            <select id="metodo" required>
+                <option value="" disabled selected>Elige una opción</option>
+                <option value="Nequi">Nequi</option>
+                <option value="Daviplata">Daviplata</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="numero">Número de cuenta:</label>
+            <input type="text" id="numero" placeholder="Ingresa tu número" pattern="[0-9]+" required>
+        </div>
+
+        <button type="submit" class="boton"><a href="cinco.html" style="color: white; text-decoration: none;">Enviar dinero</a></button>
+    </form>
+
+    <div class="sorpresa" id="mensajeSorpresa" style="display:none;"></div>
+
+    <div class="nota">
+        Solo manejamos estos dos bancos.
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('destinoForm');
+    const mensaje = document.getElementById('mensajeSorpresa');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const metodo = document.getElementById('metodo').value;
+        const numero = document.getElementById('numero').value;
+
+        mensaje.textContent = `¡Perfecto! Tu dinero será enviado a tu cuenta ${metodo} terminada en ${numero.slice(-4)} 💸`;
+        mensaje.style.display = 'block';
+        form.reset();
+    });
+</script>
+
+</body>
+</html>

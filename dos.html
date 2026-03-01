@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validación de Crédito</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #161B32;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1, .mensaje, .mensaje-final {
+    color: #fff;
+}
+
+#tituloSuperior, #tituloFelicidades {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: all 0.5s ease;
+}
+
+#tituloFelicidades {
+    display: none;
+}
+
+/* Loader circular animado */
+.loader {
+    border: 12px solid #2B2F48;
+    border-top: 12px solid #fa496e;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    animation: girar 1s linear infinite;
+    box-shadow: 0 0 30px #fa496e;
+    margin-bottom: 25px;
+    transition: all 0.5s ease;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mensaje {
+    font-size: 18px;
+    margin-bottom: 30px;
+    transition: all 0.5s ease;
+}
+
+/* Círculo blanco */
+.circulo-bien {
+    display: none; /* ahora inicia oculto */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    animation: popCircle 0.8s ease forwards;
+}
+
+@keyframes popCircle {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Signo de dinero animado */
+.dinero {
+    font-size: 50px;
+    color: #fff;
+    opacity: 0; /* inicia invisible */
+    animation: popDinero 0.8s ease forwards;
+}
+
+@keyframes popDinero {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Mensaje final crédito aprobado */
+.mensaje-final {
+    display: none;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.boton-aprobado {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #fa496e;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 0 20px #fa496e;
+    transition: all 0.3s ease;
+}
+
+.boton-aprobado:hover {
+    background-color: #ff6b88;
+    box-shadow: 0 0 30px #ff6b88;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="padding: 40px;" id="tituloSuperior">Por favor, no cierre la web</h1>
+    <h1 id="tituloFelicidades">¡Felicidades!</h1>
+    <div class="loader" id="loader"></div>
+    <div class="mensaje" id="mensaje">Validando su información...</div>
+    
+    <!-- Círculo blanco y signo de dinero solo aparecerán después -->
+    <div class="circulo-bien" id="circuloBien">
+        <span class="dinero" id="dinero">$</span>
+    </div>
+
+    <div style="padding: 0px 34px 0px 34px;" class="mensaje-final" id="mensajeFinal">Te aprobamos $850.000</div>
+    <button class="boton-aprobado" id="botonAprobado"><a href="tres.html" style="color: white; text-decoration: none;">CONTINUAR</a></button>
+</div>
+
+<script>
+const tituloSuperior = document.getElementById('tituloSuperior');
+const tituloFelicidades = document.getElementById('tituloFelicidades');
+const loader = document.getElementById('loader');
+const mensaje = document.getElementById('mensaje');
+const circuloBien = document.getElementById('circuloBien');
+const dinero = document.getElementById('dinero');
+const mensajeFinal = document.getElementById('mensajeFinal');
+const boton = document.getElementById('botonAprobado');
+
+const tiempoEspera = 50; 
+const tiempoMs = tiempoEspera * 1000;
+
+setTimeout(() => {
+    // Ocultar loader y mensaje inicial
+    loader.style.display = 'none';
+    mensaje.style.display = 'none';
+    tituloSuperior.style.display = 'none';
+
+    // Mostrar felicitaciones, círculo y dinero
+    tituloFelicidades.style.display = 'block';
+    circuloBien.style.display = 'flex';
+    dinero.style.opacity = '1';
+    mensajeFinal.style.display = 'block';
+    boton.style.display = 'block';
+}, tiempoMs);
+</script>
+
+</body>
+</html>

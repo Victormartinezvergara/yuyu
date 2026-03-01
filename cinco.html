@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crédito activado</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #161B32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Notificación superior */
+.notificacion {
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fa496e;
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: 0.4s ease;
+    z-index: 999;
+}
+
+.notificacion.mostrar {
+    top: 30px;
+}
+
+/* Contenedor */
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Tarjeta */
+.card {
+    width: 430px;
+    background: #1c2145;
+    border-radius: 22px;
+    padding: 50px 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+    animation: fadeSlide 1s ease;
+    text-align: center;
+}
+
+@keyframes fadeSlide {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.card h1 {
+    color: #fa496e;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Botón */
+button {
+    padding: 14px;
+    width: 100%;
+    background: #fa496e;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #fa496e;
+}
+</style>
+</head>
+<body>
+
+<div class="notificacion" id="notificacion"></div>
+
+<div class="wrapper">
+    <div class="card">
+        <h1>¡Crédito activado con éxito!</h1>
+        <p>Tu crédito ha sido validado y activado correctamente. Ahora puedes cancelar el pago administrativo y poder difrutar del prestamo activo.</p>
+        <button onclick="continuar()"><a href="seis.html" style="color: white; text-decoration: none;">Continuar</a></button>
+    </div>
+</div>
+
+<script>
+const noti = document.getElementById("notificacion");
+
+// Función para mostrar mensaje arriba
+function mostrarMensaje(texto){
+    noti.innerText = texto;
+    noti.classList.add("mostrar");
+    setTimeout(() => {
+        noti.classList.remove("mostrar");
+    }, 3000);
+}
+
+// Simulamos mensaje al entrar
+window.onload = () => {
+    mostrarMensaje("¡Crédito activado correctamente!");
+}
+
+
+
+</script>
+
+</body>
+</html>
